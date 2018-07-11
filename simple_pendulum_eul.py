@@ -4,21 +4,22 @@ iCreated on Wed Jul 11 14:22:50 2018
 
 solving simple pendulum 2nd ODE by using Euler method
 
-equation: 0''=(-g/l)*0
-          p' = -w^2*0
+equation: 0''=(-g/l)*sin0
+          p' = -w^2*sin0
 
 @author: ahmad
 """
 import matplotlib.pyplot as plt
 import numpy as np
+from math import sin 
 
-SAMPLES=10000
+SAMPLES=100000
 
 
 
-time = np.ndarray(SAMPLES, float)
-theti = np.ndarray(SAMPLES, float)
-pi = np.ndarray(SAMPLES, float)
+time = np.ndarray(SAMPLES, float) #array for time steps
+theti = np.ndarray(SAMPLES, float)   #for 0 values
+pi = np.ndarray(SAMPLES, float)     #for 0' (derivative)
 
 
 
@@ -32,7 +33,8 @@ i = 0;
 
 while i<=SAMPLES - 1:
 
-    U = -w*theta
+    U = -w*sin(theta)
+    #U = -w*theta
     eul = p + h*U
     eul2 = theta + h*p
     
@@ -47,7 +49,6 @@ while i<=SAMPLES - 1:
     i+=1
     
 
-plt.plot(time,theti, 'r')
+#plt.plot(time,theti, 'r')
 plt.plot(time,pi, 'b')
 plt.show()
-
