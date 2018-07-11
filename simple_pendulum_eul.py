@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 11 14:22:50 2018
+iCreated on Wed Jul 11 14:22:50 2018
 
 solving simple pendulum 2nd ODE by using Euler method
 
@@ -12,11 +12,13 @@ equation: 0''=(-g/l)*0
 import matplotlib.pyplot as plt
 import numpy as np
 
+SAMPLES=10000
 
 
-time = np.ndarray(1001, float)
-theti = np.ndarray(1001, float)
-pi = np.ndarray(1001, float)
+
+time = np.ndarray(SAMPLES, float)
+theti = np.ndarray(SAMPLES, float)
+pi = np.ndarray(SAMPLES, float)
 
 
 
@@ -28,7 +30,7 @@ w = 1;
 
 i = 0;
 
-while i<=1000:
+while i<=SAMPLES - 1:
 
     U = -w*theta
     eul = p + h*U
