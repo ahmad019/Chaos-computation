@@ -22,30 +22,29 @@ pi = np.ndarray(101, float)
 
 p = 0;
 h = 0.01;
-x= 10;
-y = 0;
+theta= 10;
 w = 1;
 
 i = 0;
 
 while i<=100:
 
-    U = -w*x
+    U = -w*theta
     eul = p + h*U
-    eul2 = y + h*p
+    eul2 = theta + h*p
     
     p = eul;
-    x = x + h;
+    theta = theta + h;
     y = eul2;
     
-    xi[i]=x;
+    xi[i]=theta;
     yi[i]=eul2;
     pi[i]=eul;
     
     i+=1
     
 
-plt.plot(xi,yi)
-plt.plot(xi,pi)
+plt.plot(xi,yi, 'r')
+plt.plot(xi,pi, 'b')
 plt.show()
 
