@@ -14,37 +14,38 @@ import numpy as np
 
 
 
-xi = np.ndarray(101, float)
-yi = np.ndarray(101, float)
-pi = np.ndarray(101, float)
+time = np.ndarray(1001, float)
+theti = np.ndarray(1001, float)
+pi = np.ndarray(1001, float)
 
 
 
 p = 0;
-h = 0.01;
+h = 0.001;
 theta= 10;
+t = 0;
 w = 1;
 
 i = 0;
 
-while i<=100:
+while i<=1000:
 
     U = -w*theta
     eul = p + h*U
     eul2 = theta + h*p
     
     p = eul;
-    theta = theta + h;
-    y = eul2;
+    t = t + h;
+    theta = eul2;
     
-    xi[i]=theta;
-    yi[i]=eul2;
+    time[i]=t;
+    theti[i]=eul2;
     pi[i]=eul;
     
     i+=1
     
 
-plt.plot(xi,yi, 'r')
-plt.plot(xi,pi, 'b')
+plt.plot(time,theti, 'r')
+plt.plot(time,pi, 'b')
 plt.show()
 
