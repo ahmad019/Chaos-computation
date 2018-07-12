@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import sin 
 
-SAMPLES=100000
+SAMPLES=50000
 
 
 
@@ -48,7 +48,12 @@ while i<=SAMPLES - 1:
     
     i+=1
     
-
+#plt.title("displacement vs time")
 #plt.plot(time,theti, 'r')
-plt.plot(time,pi, 'b')
+#plt.show()
+#plt.title("derivative vs time")
+#plt.plot(time,pi, 'b')
+plt.title("phase plot")
+plt.plot(theti,pi, 'orange')
 plt.show()
+
