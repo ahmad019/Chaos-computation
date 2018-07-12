@@ -15,35 +15,42 @@ pi = np.ndarray(SAMPLES, float)     #for 0' (derivative)
 
 
 
-p = 0;
-theta= 10;
-h = 0.001;
-t = 0;
+p0 = 0;
+theta0 = 10;
+h0 = 0.001;
+t0 = 0;
 w = 1;
 
-U = -w*np.sin(theta)
+U = -w*np.sin(theta0)
+
+def U(theta):
+    return -w * theta
+
+def Usin(theta):
+    return -w * np.sin(theta)
 
 
-def euler(x,y,z,a,u):
+def euler(p,theta,h,t,c,u):
     i = 0;
     
     while i<=SAMPLES - 1:
         
-        eul = x + z*u
-        eul2 = y + z*x
+        eul = p + h* u(theta)
+        eul2 = theta + h*p
         
-        x = eul;
-        a = a + z;
-        y = eul2;
+        p = eul;
+        t = t + h;
+        theta = eul2;
         
-        time[i]=a;
+        time[i]=t;
         theti[i]=eul2;
         pi[i]=eul;
         
         i+=1
         
-    plt.plot(time,pi,'y')
+    plt.plot(theti,pi,color=c)
     
 
-euler(p,theta,h,t,U)
+euler(p0,theta0,h0,t0,'b', Usin)
+euler(p0,theta0,h0,t0,'y', U)
 
