@@ -7,9 +7,9 @@ Created on Thu Jul 12 15:09:12 2018
 import numpy as np
 import matplotlib.pyplot as plt
 
-cycles=100
+cycles=500
 density=10000
-h0 = 1/density; #step size
+h0 = 1.0/density; #step size
 
 
 SAMPLES=density*cycles #we need 10000 samples persecond so 
@@ -37,21 +37,21 @@ def Usin(theta):
 
 def euler(d,theta,h,t,c,u):
     i = 0;
-    #plt.axis([-1, 1, -1, 1])
+    plt.axis([-1, 1, -1, 1])
     while i<=SAMPLES - 1:
         
-        eul = d + h* u(theta)
-        eul2 = theta + h*eul
-        euli = d + h/2*( u(theta)+u(eul2)) 
-        eul2i = theta + h/2*(euli+eul2)
+        d_n = d + h* u(theta)
+        theta_n = theta + h*d_n
+        d_ni = d + h/2*( u(theta)+u(theta_n)) 
+        theta_ni = theta + h/2*(d_ni+d_n)
         
-        d = euli;
+        d = d_ni;
         t = t + h;
-        theta = eul2i;
+        theta = theta_ni;
         
         time[i]=t;
-        theti[i]=eul2i;
-        di[i]=euli;
+        theti[i]=theta_ni;
+        di[i]=d_ni;
         
         i+=1
         #plt.scatter(time,theti, color=c)
