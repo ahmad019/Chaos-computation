@@ -7,10 +7,12 @@ Created on Thu Jul 12 15:09:12 2018
 import numpy as np
 import matplotlib.pyplot as plt
 
-steps=100
+cycles=100
 density=10000
+h0 = 1/density; #step size
 
-SAMPLES=density*steps #we need 10000 samples persecond so 
+
+SAMPLES=density*cycles #we need 10000 samples persecond so 
     
 
 time = np.ndarray(SAMPLES, float) #array for time steps
@@ -21,7 +23,6 @@ di = np.ndarray(SAMPLES, float)     #for 0' (derivative)
 
 d0 = 0; #derivative
 theta0 = np.pi / 4; #initial displacement
-h0 = 0.001;
 t0 = 0
 w = 1
 
