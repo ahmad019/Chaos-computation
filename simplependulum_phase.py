@@ -7,20 +7,20 @@ Created on Thu Jul 12 15:09:12 2018
 import numpy as np
 import matplotlib.pyplot as plt
 
-steps=8
-density=1000
+steps=100
+density=10000
 
 SAMPLES=density*steps #we need 10000 samples persecond so 
     
 
 time = np.ndarray(SAMPLES, float) #array for time steps
 theti = np.ndarray(SAMPLES, float)   #for 0 values
-pi = np.ndarray(SAMPLES, float)     #for 0' (derivative)
+di = np.ndarray(SAMPLES, float)     #for 0' (derivative)
 
 
 
-p0 = 0;
-theta0 = np.pi / 4;
+d0 = 0; #derivative
+theta0 = np.pi / 4; #initial displacement
 h0 = 0.001;
 t0 = 0
 w = 1
@@ -34,31 +34,36 @@ def Usin(theta):
     return -w**2 * np.sin(theta)
 
 
-def euler(p,theta,h,t,c,u):
+def euler(d,theta,h,t,c,u):
     i = 0;
-    
+    #plt.axis([-1, 1, -1, 1])
     while i<=SAMPLES - 1:
         
-        eul = p + h* u(theta)
-        eul2 = theta + h*p
+        eul = d + h* u(theta)
+        eul2 = theta + h*eul
+        euli = d + h/2*( u(theta)+u(eul2)) 
+        eul2i = theta + h/2*(euli+eul2)
         
-        p = eul;
+        d = euli;
         t = t + h;
-        theta = eul2;
+        theta = eul2i;
         
         time[i]=t;
-        theti[i]=eul2;
-        pi[i]=eul;
+        theti[i]=eul2i;
+        di[i]=euli;
         
         i+=1
+        #plt.scatter(time,theti, color=c)
+        #plt.pause(0.001)
         
-    plt.plot(theti,pi,color=c) #phase plot
+    plt.plot(theti,di,color=c) #phase plot
+    plt.show()
     
-    #plt.plot(time,theti, color=c)
-   # plt.show()
-    #plt.plot(time,pi, color=c)
+   # plt.plot(time,theti, color=c)
+    #plt.show()
+    #plt.plot(time,di, color=c)
     
 
 #euler(p0,theta0,h0,t0,'b', Usin)
-euler(p0,theta0,h0,t0,'m', U)
+euler(d0,theta0,h0,t0,'m', U)
 
