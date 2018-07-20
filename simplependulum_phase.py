@@ -7,8 +7,8 @@ Created on Thu Jul 12 15:09:12 2018
 import numpy as np
 import matplotlib.pyplot as plt
 
-cycles=500
-density=10000
+cycles=10
+density=100
 h0 = 1.0/density; #step size
 
 
@@ -21,8 +21,8 @@ di = np.ndarray(SAMPLES, float)     #for 0' (derivative)
 
 
 
-d0 = 0; #derivative
-theta0 = np.pi / 4; #initial displacement
+d0 = 4; #derivative
+theta0 = np.pi / 8; #initial displacement
 t0 = 0
 w = 1
 
@@ -37,7 +37,7 @@ def Usin(theta):
 
 def euler(d,theta,h,t,c,u):
     i = 0;
-    plt.axis([-1, 1, -1, 1])
+    #plt.axis([-1, 1, -1, 1])
     while i<=SAMPLES - 1:
         
         d_n = d + h* u(theta)
@@ -57,14 +57,19 @@ def euler(d,theta,h,t,c,u):
         #plt.scatter(time,theti, color=c)
         #plt.pause(0.001)
         
-    plt.plot(theti,di,color=c) #phase plot
+    plt.plot(theti,di,color=c)#phase plot
+    plt.title('phase plot')
     plt.show()
     
-   # plt.plot(time,theti, color=c)
-    #plt.show()
-    #plt.plot(time,di, color=c)
-    
+    plt.plot(time,theti, color=c)
+    plt.title('Time series of displacement')
+    plt.show()
 
-#euler(p0,theta0,h0,t0,'b', Usin)
-euler(d0,theta0,h0,t0,'m', U)
+    
+    plt.plot(time,di, color=c)
+    plt.title('Time series of derivatives')
+    plt.show()
+
+euler(d0,theta0,h0,t0,'b', Usin)
+#euler(d0,theta0,h0,t0,'m', U)
 
