@@ -18,6 +18,7 @@ SAMPLES=density*cycles #we need 10000 samples persecond so
 time = np.ndarray(SAMPLES, float) #array for time steps
 theti = np.ndarray(SAMPLES, float)   #for 0 values
 di = np.ndarray(SAMPLES, float)     #for 0' (derivative)
+ai = np.ndarray(SAMPLES, float)     #for 0'' (double derivative)
 
 
 
@@ -52,23 +53,29 @@ def euler(d,theta,h,t,c,u):
         time[i]=t;
         theti[i]=theta_ni;
         di[i]=d_ni;
+        ai[i]=u(theta)
         
         i+=1
         #plt.scatter(time,theti, color=c)
         #plt.pause(0.001)
         
-    plt.plot(theti,di,color=c)#phase plot
-    plt.title('phase plot')
-    plt.show()
+    #plt.plot(theti,di,color=c)#phase plot
+    #plt.title('phase plot')
+    #plt.show()
     
     plt.plot(time,theti, color=c)
     plt.title('Time series of displacement')
     plt.show()
 
     
-    plt.plot(time,di, color=c)
-    plt.title('Time series of derivatives')
-    plt.show()
+    #plt.plot(time,di, color=c)
+    #plt.title('Time series of velocity')
+    #plt.show()
+    
+    plt.plot(time,ai, color=c)
+    plt.title('Time series of acceleration')
+    #plt.show()
+
 
 euler(d0,theta0,h0,t0,'b', Usin)
 #euler(d0,theta0,h0,t0,'m', U)
